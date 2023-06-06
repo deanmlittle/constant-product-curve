@@ -1,7 +1,7 @@
 use wasm_bindgen::prelude::*;
 use std::error::Error;
 use std::fmt;
-use constant_product_curve::ConstantProduct;
+use constant_product_curve;
 
 #[wasm_bindgen]
 #[derive(Debug)]
@@ -82,54 +82,54 @@ impl fmt::Display for CurveError {
 
 #[wasm_bindgen]
 #[derive(Debug)]
-pub struct ConstantProductWasm(ConstantProduct);
+pub struct ConstantProduct(constant_product_curve::ConstantProduct);
 
 #[wasm_bindgen]
-impl ConstantProductWasm {
+impl ConstantProduct {
     #[wasm_bindgen(constructor)]
-    pub fn init(x: u64, y: u64, l: u64, fee: u16, precision: Option<u8>) -> Result<ConstantProductWasm, JsError> {
+    pub fn init(x: u64, y: u64, l: u64, fee: u16, precision: Option<u8>) -> Result<ConstantProduct, JsError> {
         // Assert non-zero values of X and Y
-        Ok(Self(ConstantProduct::init(x, y, l, fee, precision)?))
+        Ok(Self(constant_product_curve::ConstantProduct::init(x, y, l, fee, precision)?))
     }
 
     // Static Invariant calculation
     #[wasm_bindgen]
     pub fn k_from_xy(x: u64, y: u64) -> Result<JsValue, JsError> {
-        let k = ConstantProduct::k_from_xy(x, y)?;
+        let k = constant_product_curve::ConstantProduct::k_from_xy(x, y)?;
         Ok(JsValue::from(k))
     }
 
     // Get spot price for a token in its opposing token
     #[wasm_bindgen]
     pub fn spot_price_from_pair(x: u64, y: u64, precision: u32) -> Result<SpotPrice, JsError> {
-        let v = ConstantProduct::spot_price_from_pair(x, y, precision)?;
+        let v = constant_product_curve::ConstantProduct::spot_price_from_pair(x, y, precision)?;
         Ok(SpotPrice { lower: (v.amount & 0b00000000000000001111111111111111) as u64, upper: (v.amount >> 64) as u64, precision: v.precision })
     }
 
     pub fn xy_deposit_amounts_from_l(x: u64, y: u64, l: u64, a: u64, precision: u32) -> Result<XYAmounts, JsError> {
-        let v = ConstantProduct::xy_deposit_amounts_from_l(x, y, l, a, precision)?;
+        let v = constant_product_curve::ConstantProduct::xy_deposit_amounts_from_l(x, y, l, a, precision)?;
         Ok(XYAmounts { x: v.x, y: v.y })
     }
 
     pub fn xy_withdraw_amounts_from_l(x: u64, y: u64, l: u64, a: u64, precision: u32) -> Result<XYAmounts, JsError> {
-        let v = ConstantProduct::xy_deposit_amounts_from_l(x, y, l, a, precision)?;
+        let v = constant_product_curve::ConstantProduct::xy_deposit_amounts_from_l(x, y, l, a, precision)?;
         Ok(XYAmounts { x: v.x, y: v.y })
     }
 
     pub fn x2_from_y_swap_amount(x: u64, y: u64, a: u64) -> Result<JsValue, JsError> {
-        Ok(ConstantProduct::x2_from_y_swap_amount(x, y, a)?.into())
+        Ok(constant_product_curve::ConstantProduct::x2_from_y_swap_amount(x, y, a)?.into())
     }
 
     pub fn y2_from_x_swap_amount(x: u64, y: u64, a: u64) -> Result<JsValue, JsError> {
-        Ok(ConstantProduct::x2_from_y_swap_amount(y,x,a)?.into())
+        Ok(constant_product_curve::ConstantProduct::x2_from_y_swap_amount(y,x,a)?.into())
     }
 
     pub fn delta_x_from_y_swap_amount(x: u64, y: u64, a: u64) -> Result<JsValue, JsError> {
-        Ok(ConstantProduct::delta_x_from_y_swap_amount(x,y,a)?.into())
+        Ok(constant_product_curve::ConstantProduct::delta_x_from_y_swap_amount(x,y,a)?.into())
     }
 
     pub fn delta_y_from_x_swap_amount(x: u64, y: u64, a: u64) -> Result<JsValue, JsError> {
-        Ok(ConstantProduct::delta_x_from_y_swap_amount(y,x,a)?.into())
+        Ok(constant_product_curve::ConstantProduct::delta_x_from_y_swap_amount(y,x,a)?.into())
     }
 
     pub fn k(&self) -> Result<JsValue, JsError> {
