@@ -3,21 +3,6 @@ imports['__wbindgen_placeholder__'] = module.exports;
 let wasm;
 const { TextDecoder } = require(`util`);
 
-const heap = new Array(128).fill(undefined);
-
-heap.push(undefined, null, true, false);
-
-let heap_next = heap.length;
-
-function addHeapObject(obj) {
-    if (heap_next === heap.length) heap.push(heap.length + 1);
-    const idx = heap_next;
-    heap_next = heap[idx];
-
-    heap[idx] = obj;
-    return idx;
-}
-
 let cachedTextDecoder = new TextDecoder('utf-8', { ignoreBOM: true, fatal: true });
 
 cachedTextDecoder.decode();
@@ -34,6 +19,21 @@ function getUint8Memory0() {
 function getStringFromWasm0(ptr, len) {
     ptr = ptr >>> 0;
     return cachedTextDecoder.decode(getUint8Memory0().subarray(ptr, ptr + len));
+}
+
+const heap = new Array(128).fill(undefined);
+
+heap.push(undefined, null, true, false);
+
+let heap_next = heap.length;
+
+function addHeapObject(obj) {
+    if (heap_next === heap.length) heap.push(heap.length + 1);
+    const idx = heap_next;
+    heap_next = heap[idx];
+
+    heap[idx] = obj;
+    return idx;
 }
 
 function getObject(idx) { return heap[idx]; }
@@ -780,6 +780,11 @@ class XYAmounts {
 }
 module.exports.XYAmounts = XYAmounts;
 
+module.exports.__wbindgen_bigint_from_str = function(arg0, arg1) {
+    const ret = BigInt(getStringFromWasm0(arg0, arg1));
+    return addHeapObject(ret);
+};
+
 module.exports.__wbindgen_bigint_from_u128 = function(arg0, arg1) {
     const ret = BigInt.asUintN(64, arg0) << BigInt(64) | BigInt.asUintN(64, arg1);
     return addHeapObject(ret);
@@ -787,11 +792,6 @@ module.exports.__wbindgen_bigint_from_u128 = function(arg0, arg1) {
 
 module.exports.__wbindgen_bigint_from_u64 = function(arg0) {
     const ret = BigInt.asUintN(64, arg0);
-    return addHeapObject(ret);
-};
-
-module.exports.__wbindgen_bigint_from_str = function(arg0, arg1) {
-    const ret = BigInt(getStringFromWasm0(arg0, arg1));
     return addHeapObject(ret);
 };
 

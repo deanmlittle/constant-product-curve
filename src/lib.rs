@@ -1,7 +1,6 @@
 use wasm_bindgen::prelude::*;
 use std::error::Error;
 use std::fmt;
-use std::ops::{ShlAssign, Shl};
 
 macro_rules! assert_non_zero {
     ($array:expr) => {
@@ -72,7 +71,7 @@ impl SpotPriceWasm {
 #[cfg(target_arch = "wasm32")]
 impl From<SpotPrice> for SpotPriceWasm {
     fn from(value: SpotPrice) -> Self {
-        SpotPriceWasm { lower: value.amount as u64, upper: (value.amount >> 64) as u64, precision: value.precision }
+        SpotPriceWasm { lower: (value.amount & 0b00000000000000001111111111111111) as u64, upper: (value.amount >> 64) as u64, precision: value.precision }
     }
 }
 

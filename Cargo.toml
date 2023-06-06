@@ -8,6 +8,7 @@ repository = "https://github.com/deanmlittle/constant-product-curve"
 license = "MIT"
 
 [lib]
+name = "constant_product_curve"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
