@@ -17,7 +17,12 @@ checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 [[package]]
 name = "constant-product-curve"
 version = "0.1.0"
+
+[[package]]
+name = "constant-product-curve-wasm"
+version = "0.1.0"
 dependencies = [
+ "constant-product-curve",
  "wasm-bindgen",
 ]
 

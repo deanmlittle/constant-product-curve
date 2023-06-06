@@ -1,16 +1,20 @@
 {
-  "name": "constant-product-curve",
+  "name": "constant-product-curve-wasm",
   "collaborators": [
     "Dean Little (@deanmlittle)"
   ],
   "description": "An educational example of a Constant Product Curve",
   "version": "0.1.0",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deanmlittle/constant-product-curve"
+  },
   "files": [
-    "/pkg/constant_product_curve_bg.wasm",
-    "/pkg/constant_product_curve.js",
-    "/pkg/constant_product_curve.d.ts"
+    "constant_product_curve_bg.wasm",
+    "constant_product_curve.js",
+    "constant_product_curve.d.ts"
   ],
-  "main": "/pkg/constant_product_curve.js",
-  "types": "/pkg/constant_product_curve.d.ts"
+  "main": "constant_product_curve.js",
+  "types": "constant_product_curve.d.ts"
 }

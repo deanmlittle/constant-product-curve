@@ -1,4 +1,6 @@
 make:
-	wasm-pack build --release --target nodejs
-	rm -f pkg/package.json pkg/README.md pkg/.gitignore
-	sed -i '' 's/to_bigint(): any/to_bigint(): bigint/' pkg/constant_product_curve.d.ts
+	wasm-pack build constant-product-curve-wasm --out-dir ../pkg --release --target nodejs
+	rm -f pkg/README.md pkg/.gitignore
+	mv pkg/* .
+	rm -rf pkg
+	sed -i '' 's/to_bigint(): any/to_bigint(): bigint/' constant_product_curve.d.ts
