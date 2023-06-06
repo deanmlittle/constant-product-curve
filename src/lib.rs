@@ -47,7 +47,7 @@ pub struct SpotPrice {
     pub precision: u32
 }
 
-// #[cfg(target_arch = "wasm32")]
+#[cfg(target_arch = "wasm32")]
 #[wasm_bindgen]
 #[derive(Debug, Clone)]
 pub struct SpotPriceWasm {
@@ -56,6 +56,7 @@ pub struct SpotPriceWasm {
     pub precision: u32
 }
 
+#[cfg(target_arch = "wasm32")]
 impl From<SpotPrice> for SpotPriceWasm {
     fn from(value: SpotPrice) -> Self {
         SpotPriceWasm { lower: value.amount as u64, upper: (value.amount >> 64) as u64, precision: value.precision }
@@ -366,9 +367,8 @@ impl ConstantProduct {
     }
 }
 
-
 // WASM impl
-// #[cfg(target_arch = "wasm32")]
+#[cfg(target_arch = "wasm32")]
 #[wasm_bindgen]
 impl ConstantProduct {
     #[wasm_bindgen(constructor)]
