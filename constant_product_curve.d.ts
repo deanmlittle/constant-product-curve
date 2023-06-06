@@ -19,7 +19,7 @@ export enum CurveError {
 }
 /**
 */
-export class ConstantProductWasm {
+export class ConstantProduct {
   free(): void;
 /**
 * @param {bigint} x

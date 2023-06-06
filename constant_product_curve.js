@@ -70,11 +70,11 @@ module.exports.LiquidityPair = Object.freeze({ X:0,"0":"X",Y:1,"1":"Y", });
 module.exports.CurveError = Object.freeze({ InvalidPrecision:0,"0":"InvalidPrecision",Overflow:1,"1":"Overflow",Underflow:2,"2":"Underflow",InvalidFeeAmount:3,"3":"InvalidFeeAmount",InsufficientBalance:4,"4":"InsufficientBalance",ZeroBalance:5,"5":"ZeroBalance",SlippageLimitExceeded:6,"6":"SlippageLimitExceeded", });
 /**
 */
-class ConstantProductWasm {
+class ConstantProduct {
 
     static __wrap(ptr) {
         ptr = ptr >>> 0;
-        const obj = Object.create(ConstantProductWasm.prototype);
+        const obj = Object.create(ConstantProduct.prototype);
         obj.__wbg_ptr = ptr;
 
         return obj;
@@ -89,7 +89,7 @@ class ConstantProductWasm {
 
     free() {
         const ptr = this.__destroy_into_raw();
-        wasm.__wbg_constantproductwasm_free(ptr);
+        wasm.__wbg_constantproduct_free(ptr);
     }
     /**
     * @param {bigint} x
@@ -101,14 +101,14 @@ class ConstantProductWasm {
     constructor(x, y, l, fee, precision) {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_init(retptr, x, y, l, fee, isLikeNone(precision) ? 0xFFFFFF : precision);
+            wasm.constantproduct_init(retptr, x, y, l, fee, isLikeNone(precision) ? 0xFFFFFF : precision);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
             if (r2) {
                 throw takeObject(r1);
             }
-            return ConstantProductWasm.__wrap(r0);
+            return ConstantProduct.__wrap(r0);
         } finally {
             wasm.__wbindgen_add_to_stack_pointer(16);
         }
@@ -121,7 +121,7 @@ class ConstantProductWasm {
     static k_from_xy(x, y) {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_k_from_xy(retptr, x, y);
+            wasm.constantproduct_k_from_xy(retptr, x, y);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -142,7 +142,7 @@ class ConstantProductWasm {
     static spot_price_from_pair(x, y, precision) {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_spot_price_from_pair(retptr, x, y, precision);
+            wasm.constantproduct_spot_price_from_pair(retptr, x, y, precision);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -165,7 +165,7 @@ class ConstantProductWasm {
     static xy_deposit_amounts_from_l(x, y, l, a, precision) {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_xy_deposit_amounts_from_l(retptr, x, y, l, a, precision);
+            wasm.constantproduct_xy_deposit_amounts_from_l(retptr, x, y, l, a, precision);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -188,7 +188,7 @@ class ConstantProductWasm {
     static xy_withdraw_amounts_from_l(x, y, l, a, precision) {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_xy_deposit_amounts_from_l(retptr, x, y, l, a, precision);
+            wasm.constantproduct_xy_deposit_amounts_from_l(retptr, x, y, l, a, precision);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -209,7 +209,7 @@ class ConstantProductWasm {
     static x2_from_y_swap_amount(x, y, a) {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_x2_from_y_swap_amount(retptr, x, y, a);
+            wasm.constantproduct_x2_from_y_swap_amount(retptr, x, y, a);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -230,7 +230,7 @@ class ConstantProductWasm {
     static y2_from_x_swap_amount(x, y, a) {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_y2_from_x_swap_amount(retptr, x, y, a);
+            wasm.constantproduct_y2_from_x_swap_amount(retptr, x, y, a);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -251,7 +251,7 @@ class ConstantProductWasm {
     static delta_x_from_y_swap_amount(x, y, a) {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_delta_x_from_y_swap_amount(retptr, x, y, a);
+            wasm.constantproduct_delta_x_from_y_swap_amount(retptr, x, y, a);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -272,7 +272,7 @@ class ConstantProductWasm {
     static delta_y_from_x_swap_amount(x, y, a) {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_delta_y_from_x_swap_amount(retptr, x, y, a);
+            wasm.constantproduct_delta_y_from_x_swap_amount(retptr, x, y, a);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -290,7 +290,7 @@ class ConstantProductWasm {
     k() {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_k(retptr, this.__wbg_ptr);
+            wasm.constantproduct_k(retptr, this.__wbg_ptr);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -308,7 +308,7 @@ class ConstantProductWasm {
     spot_price_x() {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_spot_price_x(retptr, this.__wbg_ptr);
+            wasm.constantproduct_spot_price_x(retptr, this.__wbg_ptr);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -326,7 +326,7 @@ class ConstantProductWasm {
     spot_price_y() {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_spot_price_y(retptr, this.__wbg_ptr);
+            wasm.constantproduct_spot_price_y(retptr, this.__wbg_ptr);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -346,7 +346,7 @@ class ConstantProductWasm {
     swap_unsafe(p, a) {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_swap_unsafe(retptr, this.__wbg_ptr, p, a);
+            wasm.constantproduct_swap_unsafe(retptr, this.__wbg_ptr, p, a);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -367,7 +367,7 @@ class ConstantProductWasm {
     swap(p, a, min) {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_swap(retptr, this.__wbg_ptr, p, a, min);
+            wasm.constantproduct_swap(retptr, this.__wbg_ptr, p, a, min);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -388,7 +388,7 @@ class ConstantProductWasm {
     deposit_liquidity_unsafe(x, y, a) {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_deposit_liquidity_unsafe(retptr, this.__wbg_ptr, x, y, a);
+            wasm.constantproduct_deposit_liquidity_unsafe(retptr, this.__wbg_ptr, x, y, a);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -409,7 +409,7 @@ class ConstantProductWasm {
     withdraw_liquidity_unsafe(x, y, a) {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_withdraw_liquidity_unsafe(retptr, this.__wbg_ptr, x, y, a);
+            wasm.constantproduct_withdraw_liquidity_unsafe(retptr, this.__wbg_ptr, x, y, a);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -430,7 +430,7 @@ class ConstantProductWasm {
     deposit_liquidity(a, max_x, max_y) {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_deposit_liquidity(retptr, this.__wbg_ptr, a, max_x, max_y);
+            wasm.constantproduct_deposit_liquidity(retptr, this.__wbg_ptr, a, max_x, max_y);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -451,7 +451,7 @@ class ConstantProductWasm {
     withdraw_liquidity(a, min_x, min_y) {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.constantproductwasm_withdraw_liquidity(retptr, this.__wbg_ptr, a, min_x, min_y);
+            wasm.constantproduct_withdraw_liquidity(retptr, this.__wbg_ptr, a, min_x, min_y);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var r2 = getInt32Memory0()[retptr / 4 + 2];
@@ -464,7 +464,7 @@ class ConstantProductWasm {
         }
     }
 }
-module.exports.ConstantProductWasm = ConstantProductWasm;
+module.exports.ConstantProduct = ConstantProduct;
 /**
 */
 class DepositLiquidityResult {
