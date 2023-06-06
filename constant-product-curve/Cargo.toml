@@ -1,0 +1,11 @@
+[package]
+name = "constant-product-curve"
+version = "0.1.0"
+authors = ["Dean Little (@deanmlittle)"]
+edition = "2021"
+description = "An educational example of a Constant Product Curve"
+repository = "https://github.com/deanmlittle/constant-product-curve"
+license = "MIT"
+
+[lib]
+name = "constant_product_curve"

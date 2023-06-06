@@ -1,0 +1,16 @@
+[package]
+name = "constant-product-curve-wasm"
+version = "0.1.0"
+authors = ["Dean Little (@deanmlittle)"]
+edition = "2021"
+description = "An educational example of a Constant Product Curve"
+repository = "https://github.com/deanmlittle/constant-product-curve"
+license = "MIT"
+
+[lib]
+name = "constant_product_curve"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+constant-product-curve = { path="../constant-product-curve" }
+wasm-bindgen = "0.2.86"
