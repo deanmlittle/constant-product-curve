@@ -57,10 +57,9 @@ pub struct SpotPriceWasm {
     pub precision: u32
 }
 
-// #[cfg(target_arch = "wasm32")]
+#[cfg(target_arch = "wasm32")]
 #[wasm_bindgen]
 impl SpotPriceWasm {
-    #[wasm_bindgen(typescript_type = "bigint")]
     pub fn to_bigint(&self) -> JsValue {
         let mut bytes: [u8;16] = [0;16];
         bytes[0..8].copy_from_slice(&self.upper.to_be_bytes());
