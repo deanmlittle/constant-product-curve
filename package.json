@@ -1,0 +1,14 @@
+{
+  "name": "constant-product-curve",
+  "collaborators": [
+    "Dean Little (@deanmlittle)"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "constant_product_curve_bg.wasm",
+    "constant_product_curve.js",
+    "constant_product_curve.d.ts"
+  ],
+  "main": "constant_product_curve.js",
+  "types": "constant_product_curve.d.ts"
+}
