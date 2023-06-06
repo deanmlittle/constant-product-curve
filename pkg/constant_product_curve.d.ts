@@ -161,6 +161,10 @@ export class DepositLiquidityResult {
 export class SpotPriceWasm {
   free(): void;
 /**
+* @returns {any}
+*/
+  to_bigint(): bigint;
+/**
 */
   lower: bigint;
 /**

@@ -1,6 +1,7 @@
 use wasm_bindgen::prelude::*;
 use std::error::Error;
 use std::fmt;
+use std::ops::{ShlAssign, Shl};
 
 macro_rules! assert_non_zero {
     ($array:expr) => {
@@ -47,13 +48,26 @@ pub struct SpotPrice {
     pub precision: u32
 }
 
-#[cfg(target_arch = "wasm32")]
+// #[cfg(target_arch = "wasm32")]
 #[wasm_bindgen]
 #[derive(Debug, Clone)]
 pub struct SpotPriceWasm {
     pub upper: u64,
     pub lower: u64,
     pub precision: u32
+}
+
+// #[cfg(target_arch = "wasm32")]
+#[wasm_bindgen]
+impl SpotPriceWasm {
+    #[wasm_bindgen(typescript_type = "bigint")]
+    pub fn to_bigint(&self) -> JsValue {
+        let mut bytes: [u8;16] = [0;16];
+        bytes[0..8].copy_from_slice(&self.upper.to_be_bytes());
+        bytes[8..16].copy_from_slice(&self.lower.to_be_bytes());
+        let s = u128::from_be_bytes(bytes).to_string();
+        JsValue::bigint_from_str(&s)
+    }
 }
 
 #[cfg(target_arch = "wasm32")]

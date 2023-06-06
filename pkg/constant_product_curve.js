@@ -36,19 +36,6 @@ function getStringFromWasm0(ptr, len) {
     return cachedTextDecoder.decode(getUint8Memory0().subarray(ptr, ptr + len));
 }
 
-function isLikeNone(x) {
-    return x === undefined || x === null;
-}
-
-let cachedInt32Memory0 = null;
-
-function getInt32Memory0() {
-    if (cachedInt32Memory0 === null || cachedInt32Memory0.byteLength === 0) {
-        cachedInt32Memory0 = new Int32Array(wasm.memory.buffer);
-    }
-    return cachedInt32Memory0;
-}
-
 function getObject(idx) { return heap[idx]; }
 
 function dropObject(idx) {
@@ -61,6 +48,19 @@ function takeObject(idx) {
     const ret = getObject(idx);
     dropObject(idx);
     return ret;
+}
+
+function isLikeNone(x) {
+    return x === undefined || x === null;
+}
+
+let cachedInt32Memory0 = null;
+
+function getInt32Memory0() {
+    if (cachedInt32Memory0 === null || cachedInt32Memory0.byteLength === 0) {
+        cachedInt32Memory0 = new Int32Array(wasm.memory.buffer);
+    }
+    return cachedInt32Memory0;
 }
 /**
 */
@@ -591,6 +591,13 @@ class SpotPriceWasm {
     set precision(arg0) {
         wasm.__wbg_set_spotpricewasm_precision(this.__wbg_ptr, arg0);
     }
+    /**
+    * @returns {any}
+    */
+    to_bigint() {
+        const ret = wasm.spotpricewasm_to_bigint(this.__wbg_ptr);
+        return takeObject(ret);
+    }
 }
 module.exports.SpotPriceWasm = SpotPriceWasm;
 /**
@@ -780,6 +787,11 @@ module.exports.__wbindgen_bigint_from_u128 = function(arg0, arg1) {
 
 module.exports.__wbindgen_bigint_from_u64 = function(arg0) {
     const ret = BigInt.asUintN(64, arg0);
+    return addHeapObject(ret);
+};
+
+module.exports.__wbindgen_bigint_from_str = function(arg0, arg1) {
+    const ret = BigInt(getStringFromWasm0(arg0, arg1));
     return addHeapObject(ret);
 };
 

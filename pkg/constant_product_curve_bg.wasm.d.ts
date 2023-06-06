@@ -3,6 +3,7 @@
 export const memory: WebAssembly.Memory;
 export function __wbg_get_spotpricewasm_precision(a: number): number;
 export function __wbg_set_spotpricewasm_precision(a: number, b: number): void;
+export function spotpricewasm_to_bigint(a: number): number;
 export function __wbg_xyamounts_free(a: number): void;
 export function __wbg_depositliquidityresult_free(a: number): void;
 export function __wbg_get_depositliquidityresult_deposit_x(a: number): number;
