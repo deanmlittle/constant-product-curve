@@ -8,4 +8,4 @@ This repo contains both a Cargo and npm package, so you can just import it and u
 Although this repo ships an `npm` package, if you make changes to the lib.rs file, you may wish to rebuild. To do this, simply run `make` in the root directory and it will rebuild for you.
 
 ### Disclaimers
-This is an educational example only. It is not a well-tested, safe library to be used in production. Use are your own risk.
+This is an educational example only. It is not a battle-tested package that is ready to be used in production. Use at your own risk.
